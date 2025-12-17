@@ -26,7 +26,6 @@
       position: relative;
     }
 
-    /* 移动端适配样式 */
     .iframe-container.mobile {
       padding: 50px 0 0 0;
     }
@@ -54,7 +53,6 @@
       z-index: 1000;
       display: flex;
       align-items: center;
-      /* 修改背景色为提取的黄色 */
       background-color: #FDD95A; 
     }
 
@@ -62,12 +60,10 @@
       width: 100%;
       display: flex;
       align-items: center;
-      /* 修改为左对齐 */
       justify-content: flex-start; 
       padding: 0 20px;
     }
 
-    /* Logo 图片样式 */
     .custom-logo-img {
       height: 36px; 
       width: auto;
@@ -90,7 +86,8 @@
 
     <iframe class="content-iframe"
       src="https://musk-online.fbcontent.cn/pub-musk-ai-studio/workflow/file/document/hYL9S3UZHg3fkbz7tx3Lfe.html"
-      frameborder="0">
+      frameborder="0"
+      allow="microphone *; camera *; midi *; encrypted-media *; autoplay *;">
     </iframe>
 
   </div>
@@ -108,7 +105,6 @@
       return isMobile
     }
 
-    // 移动端检测逻辑
     function checkMobileLayout () {
       const isMobile = getIsMobile()
       if (isMobile) {
