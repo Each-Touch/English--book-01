@@ -2,21 +2,18 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Mandy & Sandy 互动绘本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>飞象老师</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       overflow: hidden;
-      background-color: #fff;
     }
-
     .iframe-container {
       box-sizing: border-box;
       padding: 56px 20px 20px 20px;
@@ -24,15 +21,37 @@
       height: 100vh;
       position: relative;
     }
-
-    /* 移动端适配样式 */
+    /* 移动端样式适配 */
     .iframe-container.mobile {
-      padding: 50px 0 0 0;
+      padding: 0.48rem 0 0 0;
     }
-    
+    .iframe-container.mobile .watermark-overlay {
+      height: 0.48rem;
+    }
     .iframe-container.mobile .content-iframe {
       border: transparent;
       border-radius: 0;
+    }
+    .iframe-container.mobile .watermark-logo {
+      width: 0.74rem;
+      height: 0.17rem;
+      margin-right: 0.07rem;
+    }
+    /* 修改移动端内部 img 样式 */
+    .iframe-container.mobile .watermark-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .iframe-container.mobile .watermark-text {
+      padding-left: 0.08rem;
+    }
+    .iframe-container.mobile .watermark-title {
+      font-size: 0.12rem;
+    }
+    .iframe-container.mobile .watermark-content {
+      padding: 0;
+      padding-left: 0.16rem;
     }
 
     .content-iframe {
@@ -43,8 +62,6 @@
       border: 0.5px solid #C9DACC;
       border-radius: 16px;
     }
-
-    /* --- 核心修改：顶部 LOGO 栏样式 --- */
     .watermark-overlay {
       position: fixed;
       top: 0;
@@ -54,72 +71,137 @@
       z-index: 1000;
       display: flex;
       align-items: center;
-      /* 背景改为黄色 */
-      background-color: #FDD95A; 
+      cursor: pointer;
     }
 
     .watermark-content {
       width: 100%;
       display: flex;
       align-items: center;
-      /* 内容改为左对齐 */
-      justify-content: flex-start; 
-      padding: 0 20px;
+      justify-content: space-between;
+      padding: 0 32px;
     }
-
-    /* Logo 图片样式 */
-    .custom-logo-img {
-      height: 36px; 
-      width: auto;
+    .left-watermark-content {
+      display: flex;
+      align-items: center;
+    }
+    
+    /* 修改 LOGO 容器样式 */
+    .watermark-logo {
+      width: 74px;
+      height: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 14px;
+    }
+    /* 新增图片样式，替代原有的 svg 样式 */
+    .watermark-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* 保持图片比例，不被拉伸 */
       display: block;
-      object-fit: contain;
     }
 
+    .watermark-text {
+      display: flex;
+      flex-direction: column;
+      padding-left: 14px;
+      border-left: 1px solid #C9DACC;
+    }
+    .watermark-title {
+      color: #617971;
+      font-family: "PingFang SC";
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 17px;
+    }
+    .jump-button {
+      width: 90px;
+      height: 44px;
+      background: #02543B;
+      border-radius: 120px;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 14px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: all 0.3s ease;
+      margin-left: 16px;
+    }
   </style>
 </head>
-
 <body>
-
   <div class="iframe-container">
-
-    <div class="watermark-overlay">
+    <div class="watermark-overlay" onclick="openFeixiangTeacher()">
       <div class="watermark-content">
-        <img src="LOGO.png" alt="Logo" class="custom-logo-img">
+        <div class="left-watermark-content">
+          <div class="watermark-logo">
+            <img src="logo.png" alt="LOGO">
+          </div>
+          <div class="watermark-text">
+            <div class="watermark-title">feixianglaoshi.com</div>
+          </div>
+        </div>
+        <div class="right-watermark-content">
+          <button class="jump-button" onclick="openFeixiangTeacher()">
+            立即体验
+          </button>
+        </div>
       </div>
     </div>
-
     <iframe class="content-iframe"
-      src="https://musk-online.fbcontent.cn/pub-musk-ai-studio/workflow/file/document/72vyV3ofSbkirRsMX98coA.html"
-      frameborder="0"
-      allow="microphone *; camera *; autoplay *;">
+      src="https://musk-online.fbcontent.cn/pub-musk-ai-studio/workflow/file/document/VKmpnD8SLUkTyyieKvgCLn.html"
+      frameborder="0">
     </iframe>
 
   </div>
-
   <script>
-    // --- 基础的屏幕适配逻辑 (保留原版稳定性) ---
-    
     function adjustRem () {
-      const pcBaseWidth = 375 
+      const pcBaseWidth = 375 // 设计稿
       const width = document.documentElement.clientWidth
       document.documentElement.style.fontSize = `${(width / pcBaseWidth * 100).toFixed(2)}px`
     }
-
     function getIsMobile () {
       const width = document.documentElement.clientWidth
       const isMobile = /Android|webOS|iPhone|iPod|BlackBerry|iPad|Windows Phone|Mobile/i.test(navigator.userAgent) || width <= 768
+      console.log('width', width, isMobile)
       return isMobile
     }
-
-    // 移动端检测逻辑
-    function checkMobileLayout () {
+    // 打开飞象老师官网
+    function openFeixiangTeacher () {
+      const isMobile = getIsMobile()
+      // 判断是否为移动端浏览器
+      if (isMobile) {
+        // 移动端不跳转
+        return;
+      }
+      window.open('https://www.feixianglaoshi.com', '_blank');
+    }
+    // 移动端检测和按钮隐藏逻辑
+    function checkAndHideButtonOnMobile () {
       const isMobile = getIsMobile()
       if (isMobile) {
         adjustRem()
       }
-      
+      const jumpButton = document.querySelector('.right-watermark-content .jump-button');
       const iframeContainer = document.querySelector('.iframe-container');
 
+      if (isMobile && jumpButton) {
+        jumpButton.style.display = 'none';
+      } else {
+        jumpButton.style.display = 'flex'
+      }
+
+      // 移动端时给iframe-container添加类名，否则移除类名
       if (iframeContainer) {
         if (isMobile) {
           iframeContainer.classList.add('mobile');
@@ -130,12 +212,50 @@
     }
 
     function handleResize () {
-      checkMobileLayout();
+      // 响应式处理：重新检测移动端并处理按钮显示/隐藏
+      checkAndHideButtonOnMobile();
+
+      // 在窗口大小变化时，重新应用移动端相关的逻辑
+      const isMobile = getIsMobile()
+      const watermarkOverlay = document.querySelector('.watermark-overlay');
+      const iframeContainer = document.querySelector('.iframe-container');
+
+      // 根据当前设备类型调整水印覆盖层的点击行为
+      if (watermarkOverlay) {
+        if (isMobile) {
+          // 移动端：移除点击事件或设置为空函数
+          watermarkOverlay.onclick = function () {
+            // 移动端不执行跳转
+            return;
+          };
+        } else {
+          // 桌面端：恢复正常的点击跳转功能
+          watermarkOverlay.onclick = openFeixiangTeacher;
+        }
+      }
+
+      // 确保在resize时也能正确添加或移除mobile类
+      if (iframeContainer) {
+        if (isMobile) {
+          iframeContainer.classList.add('mobile');
+        } else {
+          iframeContainer.classList.remove('mobile');
+        }
+      }
     }
-
+    // 防止iframe内容溢出
     window.addEventListener('resize', handleResize);
-    document.addEventListener('DOMContentLoaded', checkMobileLayout);
-
+    // 页面加载完成后执行移动端检测
+    document.addEventListener('DOMContentLoaded', checkAndHideButtonOnMobile);
+    // 清理所有事件绑定的函数
+    function clearAllEvents () {
+      // 清除 resize 事件监听器
+      window.removeEventListener('resize', handleResize);
+      // 清除 DOMContentLoaded 事件监听器
+      document.removeEventListener('DOMContentLoaded', checkAndHideButtonOnMobile);
+    }
+    // 页面卸载时自动清理事件（可选）
+    window.addEventListener('beforeunload', clearAllEvents);
   </script>
 </body>
 </html>
