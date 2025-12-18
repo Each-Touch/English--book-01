@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>艺市小洋人学英文小组</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>互动绘本</title>
   <style>
     * {
       margin: 0;
@@ -45,6 +44,7 @@
       border-radius: 16px;
     }
 
+    /* --- 核心修改：顶部 LOGO 栏样式 --- */
     .watermark-overlay {
       position: fixed;
       top: 0;
@@ -54,7 +54,7 @@
       z-index: 1000;
       display: flex;
       align-items: center;
-      /* 修改背景色为提取的黄色 */
+      /* 背景改为黄色 */
       background-color: #FDD95A; 
     }
 
@@ -62,7 +62,7 @@
       width: 100%;
       display: flex;
       align-items: center;
-      /* 修改为左对齐 */
+      /* 内容改为左对齐 */
       justify-content: flex-start; 
       padding: 0 20px;
     }
@@ -84,18 +84,21 @@
 
     <div class="watermark-overlay">
       <div class="watermark-content">
-        <img src="LOGO.png" alt="艺市小洋人学英文小组" class="custom-logo-img">
+        <img src="LOGO.png" alt="Logo" class="custom-logo-img">
       </div>
     </div>
 
     <iframe class="content-iframe"
-      src="https://musk-online.fbcontent.cn/pub-musk-ai-studio/workflow/file/document/hYL9S3UZHg3fkbz7tx3Lfe.html"
-      frameborder="0">
+      src="https://musk-online.fbcontent.cn/pub-musk-ai-studio/workflow/file/document/VKmpnD8SLUkTyyieKvgCLn.html"
+      frameborder="0"
+      allow="microphone *; camera *; autoplay *;">
     </iframe>
 
   </div>
 
   <script>
+    // --- 基础的屏幕适配逻辑 (保留原版稳定性) ---
+    
     function adjustRem () {
       const pcBaseWidth = 375 
       const width = document.documentElement.clientWidth
@@ -135,5 +138,4 @@
 
   </script>
 </body>
-
 </html>
